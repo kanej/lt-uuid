@@ -6,6 +6,14 @@
             [lt.objs.editor.pool :as pool])
   (:require-macros [lt.macros :refer [behavior]]))
 
+(defn pad [text-input]
+  (let [text text-input
+        text (reverse text)
+        text (concat text [\0 \0 \0 \0])
+        text (take 4 text)
+        text (reverse text)]
+    (apply str text)))
+
 (defn cryto-buffer [n]
   (let [buf (js/Uint16Array. n)
         filled-buf (. js/window.crypto getRandomValues buf)]
@@ -20,7 +28,8 @@
       y-values))
 
 (defn num-chunk->hex-chunk [num-chunk]
-  (.toString num-chunk 16))
+  (-> (.toString num-chunk 16)
+      pad))
 
 (defn replace-at [index replace-char input-str]
   (let [arr (into [] input-str)
@@ -47,4 +56,12 @@
               :desc "UUID: Insert UUID at cursor."
               :exec insert-uuid})
 
+;;(take 1 (filter #(not= 36 (count %)) (take 10000 (repeatedly generate-uuid))))
 
+;;  (dotimes [n 100]
+;;    (let [length (count (generate-uuid))]
+;;      (when (not= 36 length)
+;;        (.log js/console "Fail"))))
+
+;;(generate-uuid)
+;; (.replace "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx" #"[xy]" (fn [c] "q"))
