@@ -6,21 +6,36 @@
             [lt.objs.editor.pool :as pool])
   (:require-macros [lt.macros :refer [behavior]]))
 
-(defn cryto-buffer []
-  (let [buf (js/Uint16Array. 8)]
-    (. js/window.crypto getRandomValues buf)))
+(defn cryto-buffer [n]
+  (let [buf (js/Uint16Array. n)
+        filled-buf (. js/window.crypto getRandomValues buf)]
+    (into [] (map #(aget filled-buf %) (range n)))))
+
+(def y-values [\8 \9 \a \b])
+
+(defn generate-y []
+  (-> (cryto-buffer 1)
+      first
+      (rem 4)
+      y-values))
+
+(defn num-chunk->hex-chunk [num-chunk]
+  (.toString num-chunk 16))
+
+(defn replace-at [index replace-char input-str]
+  (let [arr (into [] input-str)
+        arr (assoc arr index replace-char)]
+    (apply str arr)))
 
 (defn generate-uuid []
-  (let [rb (cryto-buffer)
-        rand-chunks (map #(.toString (aget rb %) 16) (range 8))
+  (let [rb (cryto-buffer 8)
+        rand-chunks (mapv num-chunk->hex-chunk rb)
         some-other-chunks [nil \- \- \- \- nil nil nil]]
     (->> (interleave rand-chunks some-other-chunks)
          (remove nil?)
-         (apply str))))
-
-;; (generate-uuid)
-
-;; (.replace "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx" #"[xy]" (fn [c] "q"))
+         (apply str)
+         (replace-at 14 \4)
+         (replace-at 19 (generate-y)))))
 
 (defn get-editor []
   (editor/->cm-ed (pool/last-active)))
@@ -31,3 +46,5 @@
 (cmd/command {:command :insert-uuid
               :desc "UUID: Insert UUID at cursor."
               :exec insert-uuid})
+
+
