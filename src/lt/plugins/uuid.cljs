@@ -53,7 +53,7 @@
   (lt.objs.editor/insert-at-cursor (get-editor) (generate-uuid)))
 
 (cmd/command {:command :uuid.insert
-              :desc "UUID: Insert UUID at cursor."
+              :desc "UUID: Insert UUID at cursor"
               :exec insert-uuid})
 
 ;;(take 1 (filter #(not= 36 (count %)) (take 10000 (repeatedly generate-uuid))))
