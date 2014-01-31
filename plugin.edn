@@ -1,5 +1,5 @@
 {:name "UUID"
  :author "John Kane"
  :source "https://github.com/kanej/lt-uuid"
- :desc "Insert UUIDs on command"
+ :desc "Insert new UUIDs on command"
  :behaviors "uuid.behaviors"}
