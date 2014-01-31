@@ -1,3 +1,6 @@
 .nrepl-port
 target/
 uuid_compiled.js*
+.lein*
+.repl/
+out/
