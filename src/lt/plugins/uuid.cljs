@@ -52,7 +52,7 @@
 (defn insert-uuid []
   (lt.objs.editor/insert-at-cursor (get-editor) (generate-uuid)))
 
-(cmd/command {:command :insert-uuid
+(cmd/command {:command :uuid.insert
               :desc "UUID: Insert UUID at cursor."
               :exec insert-uuid})
 
