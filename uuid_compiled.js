@@ -11,7 +11,7 @@ goog.require('lt.objs.popup');
 goog.require('lt.objs.popup');
 lt.plugins.uuid.pad = (function pad(text_input){var text = text_input;var text__$1 = cljs.core.reverse.call(null,text);var text__$2 = cljs.core.concat.call(null,text__$1,new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, ["0","0","0","0"], null));var text__$3 = cljs.core.take.call(null,4,text__$2);var text__$4 = cljs.core.reverse.call(null,text__$3);return cljs.core.apply.call(null,cljs.core.str,text__$4);
 });
-lt.plugins.uuid.cryto_buffer = (function cryto_buffer(n){var buf = (new Uint16Array(n));var filled_buf = window.crypto.getRandomValues(buf);return cljs.core.into.call(null,cljs.core.PersistentVector.EMPTY,cljs.core.map.call(null,(function (p1__8194_SHARP_){return (filled_buf[p1__8194_SHARP_]);
+lt.plugins.uuid.cryto_buffer = (function cryto_buffer(n){var buf = (new Uint16Array(n));var filled_buf = window.crypto.getRandomValues(buf);return cljs.core.into.call(null,cljs.core.PersistentVector.EMPTY,cljs.core.map.call(null,(function (p1__8198_SHARP_){return (filled_buf[p1__8198_SHARP_]);
 }),cljs.core.range.call(null,n)));
 });
 lt.plugins.uuid.y_values = new cljs.core.PersistentVector(null, 4, 5, cljs.core.PersistentVector.EMPTY_NODE, ["8","9","a","b"], null);
@@ -25,9 +25,17 @@ lt.plugins.uuid.generate_uuid = (function generate_uuid(){var rb = lt.plugins.uu
 });
 lt.plugins.uuid.get_editor = (function get_editor(){return lt.objs.editor.__GT_cm_ed.call(null,lt.objs.editor.pool.last_active.call(null));
 });
-lt.plugins.uuid.insert_uuid = (function insert_uuid(){return lt.objs.editor.insert_at_cursor.call(null,lt.plugins.uuid.get_editor.call(null),lt.plugins.uuid.generate_uuid.call(null));
+lt.plugins.uuid.insert_uuid = (function insert_uuid(){var temp__4092__auto__ = lt.plugins.uuid.get_editor.call(null);if(cljs.core.truth_(temp__4092__auto__))
+{var ed = temp__4092__auto__;if(cljs.core.truth_(lt.objs.editor.selection_QMARK_.call(null,ed)))
+{return lt.objs.editor.replace_selection.call(null,ed,lt.plugins.uuid.generate_uuid.call(null));
+} else
+{return lt.objs.editor.insert_at_cursor.call(null,ed,lt.plugins.uuid.generate_uuid.call(null));
+}
+} else
+{return null;
+}
 });
-lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"uuid.insert","uuid.insert",2371604414),new cljs.core.Keyword(null,"desc","desc",1016984067),"UUID: Insert UUID at cursor",new cljs.core.Keyword(null,"exec","exec",1017031683),lt.plugins.uuid.insert_uuid], null));
+lt.objs.command.command.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"command","command",1964298941),new cljs.core.Keyword(null,"uuid.insert","uuid.insert",2371604414),new cljs.core.Keyword(null,"desc","desc",1016984067),"UUID: Insert UUID",new cljs.core.Keyword(null,"exec","exec",1017031683),lt.plugins.uuid.insert_uuid], null));
 }
 
 //# sourceMappingURL=uuid_compiled.js.map

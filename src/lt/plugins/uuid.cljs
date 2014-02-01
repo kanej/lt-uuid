@@ -50,10 +50,13 @@
   (editor/->cm-ed (pool/last-active)))
 
 (defn insert-uuid []
-  (lt.objs.editor/insert-at-cursor (get-editor) (generate-uuid)))
+  (when-let [ed (get-editor)]
+    (if (editor/selection? ed)
+      (editor/replace-selection ed (generate-uuid))
+      (lt.objs.editor/insert-at-cursor ed (generate-uuid)))))
 
 (cmd/command {:command :uuid.insert
-              :desc "UUID: Insert UUID at cursor"
+              :desc "UUID: Insert UUID"
               :exec insert-uuid})
 
 ;;(take 1 (filter #(not= 36 (count %)) (take 10000 (repeatedly generate-uuid))))
@@ -64,4 +67,3 @@
 ;;        (.log js/console "Fail"))))
 
 ;;(generate-uuid)
-;; (.replace "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx" #"[xy]" (fn [c] "q"))

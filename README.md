@@ -1,7 +1,7 @@
 UUID plugin for Light Table
 ---------------------------
 
-Insert a new [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) at the cursor e.g. `9f4e9a51-a95f-4f62-afc7-60f1570d2255`.
+Insert a new [UUID](http://en.wikipedia.org/wiki/Universally_unique_identifier) at the cursor or selection e.g. `9f4e9a51-a95f-4f62-afc7-60f1570d2255`.
 
 The UUID's generated are Version4 (random). The random numbers are pulled from Webkit's [window.crypto.getRandomValues](https://developer.mozilla.org/en-US/docs/Web/API/window.crypto.getRandomValues), which Light Table wraps.
 
@@ -10,7 +10,7 @@ Usage
 
 Only one command is currently available:
 
-* UUID: Insert UUID at cursor. `:uuid.insert`
+* UUID: Insert UUID. `:uuid.insert`
 
 Installation
 ------------
@@ -20,7 +20,7 @@ Available in the central plugin repository as `UUID`. Refreshing the plugin list
 Todo
 ----
 
-1. Insert over a selection.
+1. ~~Insert over a selection~~.
 2. Options for uppercasing and removing hyphens.
 3. Support for Guids.
 
