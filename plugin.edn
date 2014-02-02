@@ -1,5 +1,5 @@
 {:name "UUID"
- :version "0.0.3"
+ :version "0.1.0"
  :author "John Kane"
  :source "https://github.com/kanej/lt-uuid"
  :desc "Insert new UUIDs on command"
