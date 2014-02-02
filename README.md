@@ -14,7 +14,7 @@ There is only one command:
 
 By default the UUID format matches RFC 4122, which is to say: lower case, hyphenated and without brackets e.g. `9f4e9a51-a95f-4f62-afc7-60f1570d2255`. The inserted UUIDs format can be configured to be: uppercase, hyphenless, bracketed or some combination of all three.
 
-To alter the format, add the following behavior to your user behavior file, setting parameters appropriately:
+To alter the format, add the following behavior to your user behavior file under the editor section, setting the options appropriately:
 
 ```clojure
 {:+ {:editor [(:lt.plugins.uuid/set-uuid-options true true true)]}}
